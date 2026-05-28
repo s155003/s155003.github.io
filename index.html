@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aarav Pulsani | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-card: #ebe6da;
+    --fg: #1a1a1a;
+    --fg-muted: #6b6b6b;
+    --accent: #e63946;
+    --accent-soft: #ffd6cf;
+    --border: rgba(0,0,0,0.08);
+  }
+  [data-theme="dark"] {
+    --bg: #1a1814;
+    --bg-card: #252220;
+    --fg: #f0ebde;
+    --fg-muted: #9a958b;
+    --accent: #ff6b6b;
+    --accent-soft: #3a2a28;
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg);
+    line-height: 1.55; overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  /* NAV */
+  nav { padding: 1.5rem 0; position: relative; z-index: 100; }
+  nav .container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
+  .nav-left { display: flex; gap: 2rem; justify-content: flex-start; }
+  .nav-right { display: flex; gap: 2rem; justify-content: flex-end; align-items: center; }
+  .nav-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+  .nav-link:hover { opacity: 0.7; }
+  .logo { font-family: 'Fraunces', serif; font-size: 2rem; color: var(--accent); font-style: italic; letter-spacing: 0.1em; text-decoration: none; }
+  .theme-toggle { background: none; border: none; cursor: pointer; color: var(--fg); font-size: 1.2rem; padding: 0.5rem; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 5rem 2rem 7rem; position: relative; overflow: hidden; min-height: 80vh; }
+  .flower { position: absolute; width: 380px; height: 380px; pointer-events: none; }
+  .flower-left { left: -140px; top: 25%; }
+  .flower-right { right: -140px; top: 35%; }
+  .hero-icon { margin: 0 auto 1.5rem; width: 40px; height: 40px; color: var(--accent); }
+  .hero-greeting { font-size: 1.05rem; color: var(--fg-muted); margin-bottom: 1.5rem; }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05; font-weight: 400; margin: 0 auto 2rem; max-width: 1000px;
+    position: relative; z-index: 2;
+  }
+  .hero h1 em { font-style: italic; }
+  .hero-sub { font-size: 1rem; color: var(--fg); max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .hr-divider { width: 60%; max-width: 600px; height: 1px; background: var(--border); margin: 2rem auto; }
+  .cta-btn {
+    display: inline-block; background: var(--fg); color: var(--bg);
+    padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none;
+    font-weight: 500; font-size: 1rem; transition: transform 0.2s, opacity 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  /* STEP INTO MY HOME */
+  .home-section { padding: 6rem 0 4rem; text-align: center; }
+  .home-icon { color: var(--accent); margin-bottom: 1rem; }
+  .home-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 4rem; }
+  .home-images { display: flex; gap: 1.5rem; padding: 0 2rem; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .home-images::-webkit-scrollbar { display: none; }
+  .home-image-tile {
+    flex: 0 0 320px; height: 240px; border-radius: 16px;
+    scroll-snap-align: start; overflow: hidden; position: relative;
+    transition: transform 0.3s;
+  }
+  .home-image-tile:hover { transform: translateY(-4px); }
+  .home-image-tile svg { display: block; }
+
+  /* LOGO STRIP */
+  .logo-strip { padding: 4rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .logo-strip-grid { display: flex; flex-wrap: wrap; gap: 4rem; align-items: center; justify-content: center; }
+  .logo-item { width: 160px; height: 60px; opacity: 0.75; transition: opacity 0.2s; }
+  .logo-item:hover { opacity: 1; }
+  .logo-item svg { width: 100%; height: 100%; }
+  [data-theme="dark"] .logo-item svg text:not([fill="white"]) { fill: var(--fg) !important; }
+  [data-theme="dark"] .logo-item svg rect[fill="#1a1a1a"] { fill: var(--fg) !important; }
+  [data-theme="dark"] .logo-item svg text[fill="white"] { fill: var(--bg) !important; }
+
+  /* WORK */
+  .work-section { padding: 6rem 0; }
+  .section-eyebrow { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1rem; }
+  .section-desc { color: var(--fg-muted); max-width: 480px; margin-bottom: 3rem; font-size: 1rem; line-height: 1.6; }
+  .work-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .work-grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .work-tile {
+    border-radius: 20px; padding: 2.5rem; min-height: 280px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden; cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .work-tile:hover { transform: translateY(-4px); }
+  .tile-flower { display: flex; align-items: center; justify-content: center; }
+  .tile-flower-yellow { background: #ffd84d; }
+  .tile-flower-pink { background: #ffb3c7; }
+  .tile-flower-blue { background: #4a47e6; }
+  .tile-flower-red { background: #c8553d; }
+  .tile-flower svg { width: 60%; height: 60%; }
+  .tile-content-card { background: var(--bg-card); padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end; }
+  .tile-content-card.tall { min-height: 360px; }
+  .work-tile h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; }
+  .work-tile h4 .desc { color: var(--fg-muted); font-weight: 400; margin-left: 0.4rem; }
+  .case-study-bar { background: var(--bg-card); border-radius: 16px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; gap: 2rem; }
+  .case-study-bar p { color: var(--fg-muted); max-width: 500px; font-size: 0.95rem; }
+  .case-btn { background: var(--fg); color: var(--bg); padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; flex-shrink: 0; }
+  .case-btn-outline { background: transparent; color: var(--fg); border: 1px solid var(--fg); }
+
+  /* NEW PROJECT CARDS — illustration on top, content below */
+  .projects-grid-new {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  }
+  .project-card-new {
+    background: var(--bg-card); border-radius: 20px; overflow: hidden;
+    transition: transform 0.3s; display: flex; flex-direction: column;
+  }
+  .project-card-new:hover { transform: translateY(-4px); }
+  .project-illustration {
+    aspect-ratio: 16 / 10; padding: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-illustration svg { width: 100%; height: 100%; max-width: 320px; }
+  .project-card-body { padding: 1.8rem 2rem 2rem; display: flex; flex-direction: column; flex: 1; }
+  .project-card-tag {
+    color: var(--accent); font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+  }
+  .project-card-new h3 {
+    font-family: 'Fraunces', serif; font-size: 1.4rem;
+    font-weight: 500; margin-bottom: 0.8rem; line-height: 1.2;
+  }
+  .project-card-new p {
+    color: var(--fg-muted); font-size: 0.95rem; line-height: 1.6;
+    margin-bottom: 1rem; flex: 1;
+  }
+  .project-card-tech {
+    color: var(--fg); font-size: 0.85rem; font-weight: 500;
+    padding-top: 1rem; border-top: 1px solid var(--border);
+  }
+
+  /* PUBLICATION CARD */
+  .publication-card {
+    background: var(--bg-card); border-radius: 20px; padding: 2.5rem;
+  }
+  .pub-header { margin-bottom: 1.5rem; }
+  .pub-header h3 {
+    font-family: 'Fraunces', serif; font-size: 1.4rem;
+    font-weight: 500; line-height: 1.3; margin-bottom: 0.5rem;
+  }
+  .pub-meta { color: var(--fg-muted); font-size: 0.9rem; }
+  .pub-abstract {
+    color: var(--fg); font-size: 1rem; line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .pub-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* BLOG */
+  .blog-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .blog-card {
+    background: var(--bg-card); border-radius: 16px; padding: 1.8rem;
+    cursor: pointer; transition: transform 0.3s; display: flex; flex-direction: column;
+    text-decoration: none; color: var(--fg);
+  }
+  .blog-card:hover { transform: translateY(-4px); }
+  .blog-card-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem;
+  }
+  .blog-tag {
+    color: var(--accent); font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .blog-date { color: var(--fg-muted); font-size: 0.8rem; }
+  .blog-card h3 {
+    font-family: 'Fraunces', serif; font-size: 1.2rem;
+    font-weight: 500; line-height: 1.3; margin-bottom: 0.8rem;
+  }
+  .blog-card p {
+    color: var(--fg-muted); font-size: 0.9rem; line-height: 1.6;
+    margin-bottom: 1rem; flex: 1;
+  }
+  .blog-card-footer {
+    color: var(--accent); font-size: 0.85rem; font-weight: 500;
+    padding-top: 1rem; border-top: 1px solid var(--border);
+  }
+  .blog-card.placeholder .blog-card-footer { color: var(--fg-muted); font-style: italic; font-weight: 400; }
+
+  /* BLOG POST MODAL */
+  .post-modal {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    overflow-y: auto; padding: 4rem 2rem;
+  }
+  .post-modal.open { display: block; }
+  .post-modal-content {
+    background: var(--bg); max-width: 760px; margin: 0 auto;
+    padding: 4rem 3rem; border-radius: 16px; position: relative;
+    color: var(--fg);
+  }
+  .post-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: var(--bg-card); border: none; cursor: pointer;
+    width: 40px; height: 40px; border-radius: 50%;
+    font-size: 1.5rem; color: var(--fg);
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .post-meta-line { color: var(--fg-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+  .post-modal-content h1 {
+    font-family: 'Fraunces', serif; font-size: 2.2rem;
+    font-weight: 500; line-height: 1.15; margin-bottom: 2rem;
+  }
+  .post-modal-content p {
+    font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem; color: var(--fg);
+  }
+  .post-modal-content strong { font-weight: 600; }
+  .post-modal-content em { font-style: italic; }
+  @media (max-width: 700px) {
+    .post-modal { padding: 1rem; }
+    .post-modal-content { padding: 3rem 1.5rem; }
+    .post-modal-content h1 { font-size: 1.6rem; }
+  }
+
+  /* SKILLS */
+  .skills-section { padding: 5rem 0 7rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; }
+  .skill-arch {
+    width: 90px; height: 110px; background: #d6d2c4;
+    border-radius: 50% 50% 4px 4px / 60% 60% 4px 4px;
+    margin-bottom: 1.5rem; position: relative; overflow: hidden;
+  }
+  .skill-arch.lines::after {
+    content: ''; position: absolute; inset: 15px 10px;
+    background: repeating-linear-gradient(0deg, transparent 0, transparent 8px, rgba(0,0,0,0.12) 8px, rgba(0,0,0,0.12) 11px);
+  }
+  .skill-arch.bricks::after {
+    content: ''; position: absolute; inset: 15px 10px;
+    background:
+      repeating-linear-gradient(0deg, transparent 0, transparent 6px, rgba(0,0,0,0.12) 6px, rgba(0,0,0,0.12) 8px),
+      repeating-linear-gradient(90deg, transparent 0, transparent 14px, rgba(255,255,255,0.4) 14px, rgba(255,255,255,0.4) 16px);
+  }
+  .skill-arch.dots::after {
+    content: ''; position: absolute; inset: 15px 10px;
+    background-image:
+      radial-gradient(circle at 4px 4px, rgba(0,0,0,0.18) 1.5px, transparent 2px),
+      radial-gradient(circle at 4px 4px, rgba(0,0,0,0.18) 1.5px, transparent 2px);
+    background-size: 12px 12px, 12px 12px;
+    background-position: 0 0, 6px 6px;
+  }
+  .skill-block h3 { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; }
+  .skill-block ul { list-style: none; }
+  .skill-block li { padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+
+  /* TIMELINE */
+  .journey-section { padding: 5rem 0 7rem; }
+  .journey-header { text-align: center; margin-bottom: 5rem; }
+  .journey-header h2 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2.5rem, 5vw, 3rem); margin-bottom: 1rem; }
+  .journey-header p { color: var(--fg-muted); max-width: 500px; margin: 0 auto; }
+  .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+  .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border); transform: translateX(-50%); }
+  .tl-row { display: grid; grid-template-columns: 1fr 80px 1fr; align-items: start; margin-bottom: 3rem; }
+  .tl-marker { text-align: center; padding-top: 1rem; }
+  .tl-year { font-family: 'Fraunces', serif; font-style: italic; color: var(--accent); font-size: 1.2rem; }
+  .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; vertical-align: middle; margin: 0 0.5rem; }
+  .tl-content { padding: 0 1rem; }
+  .tl-content h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.2; }
+  .tl-content .org { color: var(--fg-muted); margin-bottom: 1rem; font-size: 0.95rem; }
+  .tl-content ul { list-style: none; padding: 0; }
+  .tl-content li { color: var(--fg); padding: 0.4rem 0; padding-left: 1.2rem; position: relative; font-size: 0.95rem; }
+  .tl-content li::before { content: '•'; color: var(--accent); position: absolute; left: 0; font-size: 1.2rem; line-height: 1; }
+  .tl-row.right .tl-content { grid-column: 3; }
+  .tl-row.left .tl-content { grid-column: 1; text-align: right; }
+  .tl-row.left .tl-content li { padding-left: 0; padding-right: 1.2rem; }
+  .tl-row.left .tl-content li::before { left: auto; right: 0; }
+
+  /* EDUCATION */
+  .education-section { padding: 5rem 0; text-align: center; }
+  .education-section h2 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2rem; margin-bottom: 4rem; }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 900px; margin: 0 auto; }
+  .edu-item { display: flex; gap: 1rem; align-items: flex-start; text-align: left; }
+  .edu-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .edu-icon.uni { background: #ffd6cf; color: var(--accent); }
+  .edu-icon.hs { background: #d8e3f0; color: #4a6fa5; }
+  .edu-info h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.4rem; margin-bottom: 0.2rem; }
+  .edu-info .level { color: var(--fg-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+  .edu-info .degree { font-weight: 600; margin-bottom: 0.3rem; }
+  .edu-info .focus { color: var(--fg-muted); font-size: 0.95rem; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { padding: 5rem 0; }
+  .testimonials-section h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 3rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; border-top: 1px solid var(--border); padding-top: 3rem; }
+  .testimonial blockquote { font-family: 'Fraunces', serif; font-size: 1.15rem; font-style: italic; line-height: 1.5; margin-bottom: 1.5rem; }
+  .stars { color: var(--fg); font-size: 0.9rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
+  .testimonial .name { font-weight: 700; margin-bottom: 0.2rem; }
+  .testimonial .org { color: var(--fg-muted); font-size: 0.9rem; }
+
+  /* CONTACT */
+  .contact-section { padding: 5rem 0 7rem; }
+  .contact-section .container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-left h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 2rem; }
+  .contact-left p { color: var(--fg-muted); margin-bottom: 3rem; max-width: 360px; }
+  .socials { display: flex; gap: 1rem; }
+  .social-link { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--fg); transition: color 0.2s; }
+  .social-link:hover { color: var(--accent); }
+  .social-link svg { width: 100%; height: 100%; }
+  .form-field { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .form-field input, .form-field textarea { width: 100%; background: none; border: none; color: var(--fg); font-family: inherit; font-size: 1rem; padding: 0.8rem 0; outline: none; }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: var(--fg-muted); }
+  .form-field textarea { min-height: 80px; resize: vertical; }
+  .send-btn { background: var(--fg); color: var(--bg); border: none; padding: 1rem 2.5rem; border-radius: 50px; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 500; margin-top: 1rem; }
+
+  @media (max-width: 900px) {
+    .work-grid, .work-grid-2 { grid-template-columns: 1fr; }
+    .projects-grid-new { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .tl-row { grid-template-columns: 30px 1fr; }
+    .tl-row.left .tl-content, .tl-row.right .tl-content { grid-column: 2; text-align: left; }
+    .tl-row.left .tl-content li { padding-left: 1.2rem; padding-right: 0; }
+    .tl-row.left .tl-content li::before { left: 0; right: auto; }
+    .tl-marker { padding-top: 0; grid-column: 1; }
+    .timeline::before { left: 14px; transform: none; }
+    .testimonials-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-section .container { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    nav .container { gap: 1rem; }
+    .nav-link { font-size: 0.75rem; }
+    .flower { width: 200px; height: 200px; }
+    .flower-left { left: -100px; }
+    .flower-right { right: -100px; }
+  }
+</style>
+</head>
+<body id="top">
+
+<nav>
+  <div class="container">
+    <div class="nav-left">
+      <a href="#projects" class="nav-link">Works</a>
+      <a href="#publications" class="nav-link">Papers</a>
+      <a href="#blog" class="nav-link">Blog</a>
+    </div>
+    <a href="#top" class="logo">Aarav</a>
+    <div class="nav-right">
+      <a href="#contact" class="nav-link">Contact</a>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">☀</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <svg class="flower flower-left" viewBox="0 0 200 200">
+    <g fill="#7ec4e8">
+      <circle cx="100" cy="40" r="40"/><circle cx="160" cy="100" r="40"/>
+      <circle cx="100" cy="160" r="40"/><circle cx="40" cy="100" r="40"/>
+      <circle cx="143" cy="57" r="35"/><circle cx="143" cy="143" r="35"/>
+      <circle cx="57" cy="143" r="35"/><circle cx="57" cy="57" r="35"/>
+    </g>
+    <circle cx="100" cy="100" r="22" fill="#1d3fbf"/>
+  </svg>
+  <svg class="flower flower-right" viewBox="0 0 200 200">
+    <g fill="#e63946">
+      <circle cx="100" cy="40" r="40"/><circle cx="160" cy="100" r="40"/>
+      <circle cx="100" cy="160" r="40"/><circle cx="40" cy="100" r="40"/>
+      <circle cx="143" cy="57" r="35"/><circle cx="143" cy="143" r="35"/>
+      <circle cx="57" cy="143" r="35"/><circle cx="57" cy="57" r="35"/>
+    </g>
+    <circle cx="100" cy="100" r="22" fill="#fefdfb"/>
+  </svg>
+
+  <svg class="hero-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 20 Q20 4 32 20" stroke-linecap="round"/>
+    <path d="M12 20 Q20 10 28 20" stroke-linecap="round"/>
+    <path d="M16 20 Q20 16 24 20" stroke-linecap="round"/>
+  </svg>
+
+  <div class="hero-greeting">Hi, I'm Aarav</div>
+  <h1>Software and AI<br>you can <em>count on</em></h1>
+  <p class="hero-sub">Computer Engineering @ Texas A&amp;M, building real ML systems from sensor pipelines to financial forecasting. I love turning messy data and research questions into working software.</p>
+  <div class="hr-divider"></div>
+  <a href="#contact" class="cta-btn">Chat with me</a>
+</section>
+
+<section class="home-section">
+  <svg class="home-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M6 2 L6 22 M6 2 L18 2 L18 6 L6 6"/>
+  </svg>
+  <h2 class="home-title">Step into my home</h2>
+  <div class="home-images">
+
+    <div class="home-image-tile" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <!-- Laptop -->
+        <rect x="50" y="80" width="180" height="110" rx="6" fill="#0a0a0a" stroke="#444" stroke-width="1"/>
+        <rect x="58" y="88" width="164" height="94" rx="2" fill="#1e1e1e"/>
+        <!-- Code lines -->
+        <rect x="70" y="98" width="40" height="3" rx="1" fill="#e63946"/>
+        <rect x="115" y="98" width="60" height="3" rx="1" fill="#7ec4e8"/>
+        <rect x="70" y="108" width="80" height="3" rx="1" fill="#28c940"/>
+        <rect x="78" y="118" width="50" height="3" rx="1" fill="#ffd84d"/>
+        <rect x="78" y="128" width="70" height="3" rx="1" fill="#7ec4e8"/>
+        <rect x="78" y="138" width="40" height="3" rx="1" fill="#e63946"/>
+        <rect x="70" y="148" width="90" height="3" rx="1" fill="#888"/>
+        <rect x="70" y="158" width="60" height="3" rx="1" fill="#28c940"/>
+        <!-- Coffee mug -->
+        <rect x="245" y="135" width="40" height="45" rx="4" fill="#f5f1e8"/>
+        <rect x="285" y="145" width="10" height="20" rx="0 8 8 0" fill="none" stroke="#f5f1e8" stroke-width="3"/>
+        <rect x="250" y="140" width="30" height="6" rx="2" fill="#6b3410"/>
+        <!-- Steam -->
+        <path d="M 255 130 Q 252 120 257 115 Q 262 110 258 100" stroke="#f5f1e8" stroke-width="2" fill="none" opacity="0.5"/>
+        <path d="M 268 130 Q 271 120 266 115 Q 261 110 265 100" stroke="#f5f1e8" stroke-width="2" fill="none" opacity="0.5"/>
+        <!-- Laptop base -->
+        <rect x="40" y="190" width="200" height="6" rx="2" fill="#333"/>
+      </svg>
+    </div>
+
+    <div class="home-image-tile" style="background: linear-gradient(135deg, #d4dbe3 0%, #c1c9d4 50%, #d4d8c5 100%);">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <!-- VR Headset -->
+        <rect x="60" y="80" width="200" height="90" rx="40" fill="#1a1a1a"/>
+        <ellipse cx="120" cy="125" rx="28" ry="22" fill="#0a0a0a"/>
+        <ellipse cx="200" cy="125" rx="28" ry="22" fill="#0a0a0a"/>
+        <circle cx="120" cy="125" r="14" fill="#4a47e6" opacity="0.7"/>
+        <circle cx="200" cy="125" r="14" fill="#4a47e6" opacity="0.7"/>
+        <!-- Strap -->
+        <path d="M 60 110 Q 30 120 30 150 Q 30 180 60 165" fill="none" stroke="#1a1a1a" stroke-width="6"/>
+        <path d="M 260 110 Q 290 120 290 150 Q 290 180 260 165" fill="none" stroke="#1a1a1a" stroke-width="6"/>
+        <!-- Motion lines -->
+        <path d="M 30 50 Q 40 55 50 50" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M 270 50 Q 280 55 290 50" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M 60 200 Q 70 205 80 200" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M 240 200 Q 250 205 260 200" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="home-image-tile" style="background: linear-gradient(135deg, #fde8d6 0%, #f5d4c0 50%, #e8c5b4 100%);">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <!-- Car body -->
+        <rect x="70" y="120" width="180" height="45" rx="12" fill="#1a1a1a"/>
+        <path d="M 100 120 Q 110 95 140 95 L 190 95 Q 215 95 225 120 Z" fill="#1a1a1a"/>
+        <rect x="115" y="103" width="35" height="17" rx="3" fill="#7ec4e8" opacity="0.7"/>
+        <rect x="170" y="103" width="35" height="17" rx="3" fill="#7ec4e8" opacity="0.7"/>
+        <circle cx="105" cy="165" r="16" fill="#0a0a0a" stroke="#444" stroke-width="3"/>
+        <circle cx="215" cy="165" r="16" fill="#0a0a0a" stroke="#444" stroke-width="3"/>
+        <!-- LiDAR / sensor sweep arcs -->
+        <path d="M 160 90 Q 160 55 130 50" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M 160 90 Q 160 50 160 45" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M 160 90 Q 160 55 190 50" stroke="#4a47e6" stroke-width="2" fill="none" opacity="0.6"/>
+        <circle cx="130" cy="50" r="3" fill="#4a47e6"/>
+        <circle cx="160" cy="45" r="3" fill="#4a47e6"/>
+        <circle cx="190" cy="50" r="3" fill="#4a47e6"/>
+        <!-- Adversarial alert shield -->
+        <path d="M 280 60 L 295 66 L 295 84 Q 295 98 280 104 Q 265 98 265 84 L 265 66 Z" fill="#e63946"/>
+        <path d="M 274 82 L 279 88 L 288 74" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Signal grid dots -->
+        <circle cx="40" cy="70" r="2" fill="#1a1a1a" opacity="0.4"/>
+        <circle cx="55" cy="90" r="2" fill="#1a1a1a" opacity="0.4"/>
+        <circle cx="40" cy="110" r="2" fill="#1a1a1a" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <div class="home-image-tile" style="background: linear-gradient(135deg, #800020 0%, #5c0017 100%);">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <!-- TAMU "T" inspired graphic -->
+        <text x="160" y="155" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-weight="700" fill="white" font-style="italic">A</text>
+        <text x="160" y="200" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="white" letter-spacing="3">AGGIE LIFE</text>
+        <!-- Stars -->
+        <circle cx="60" cy="60" r="2" fill="white" opacity="0.6"/>
+        <circle cx="280" cy="80" r="2" fill="white" opacity="0.6"/>
+        <circle cx="40" cy="180" r="2" fill="white" opacity="0.6"/>
+        <circle cx="290" cy="200" r="2" fill="white" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="home-image-tile" style="background: linear-gradient(135deg, #f0e6d2 0%, #d8e0d4 100%);">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <!-- Open book / paper -->
+        <rect x="60" y="60" width="200" height="140" rx="6" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+        <line x1="160" y1="60" x2="160" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+        <!-- Lines on left page -->
+        <rect x="75" y="80" width="70" height="3" rx="1" fill="#1a1a1a"/>
+        <rect x="75" y="92" width="60" height="2" rx="1" fill="#666"/>
+        <rect x="75" y="100" width="65" height="2" rx="1" fill="#666"/>
+        <rect x="75" y="108" width="55" height="2" rx="1" fill="#666"/>
+        <!-- Chart on left page -->
+        <rect x="75" y="125" width="70" height="60" fill="#f0f0f0"/>
+        <polyline points="80,175 95,165 110,170 125,150 140,140" fill="none" stroke="#e63946" stroke-width="2"/>
+        <!-- Lines on right page -->
+        <rect x="175" y="80" width="60" height="3" rx="1" fill="#1a1a1a"/>
+        <rect x="175" y="92" width="65" height="2" rx="1" fill="#666"/>
+        <rect x="175" y="100" width="55" height="2" rx="1" fill="#666"/>
+        <rect x="175" y="108" width="70" height="2" rx="1" fill="#666"/>
+        <rect x="175" y="116" width="60" height="2" rx="1" fill="#666"/>
+        <!-- Equation block -->
+        <rect x="175" y="130" width="70" height="55" rx="3" fill="#fff8d6" stroke="#ddd" stroke-width="1"/>
+        <text x="180" y="155" font-family="Inter" font-size="11" font-weight="600" fill="#1a1a1a">AUC = 0.88</text>
+        <text x="180" y="172" font-family="Inter" font-size="9" fill="#666">∑ x² + β</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<div class="logo-strip">
+  <div class="container">
+    <div class="logo-strip-grid">
+      <!-- Texas A&M -->
+      <div class="logo-item">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="38" text-anchor="middle" font-family="serif" font-size="28" font-weight="700" fill="#500000" letter-spacing="2">TEXAS</text>
+          <text x="100" y="62" text-anchor="middle" font-family="serif" font-size="14" font-weight="500" fill="#500000" letter-spacing="3">A&amp;M UNIVERSITY</text>
+        </svg>
+      </div>
+      <!-- University of Alabama -->
+      <div class="logo-item">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="38" text-anchor="middle" font-family="serif" font-size="24" font-weight="700" fill="#9e1b32">ALABAMA</text>
+          <text x="100" y="60" text-anchor="middle" font-family="serif" font-size="10" font-weight="500" fill="#9e1b32" letter-spacing="2">THE UNIVERSITY OF</text>
+        </svg>
+      </div>
+      <!-- Profluento -->
+      <div class="logo-item">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#1a1a1a" letter-spacing="-1">profluento</text>
+        </svg>
+      </div>
+      <!-- KAPY -->
+      <div class="logo-item">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="60" y="20" width="80" height="40" rx="4" fill="#1a1a1a"/>
+          <text x="100" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="2">KAPY</text>
+        </svg>
+      </div>
+      <!-- NJIT -->
+      <div class="logo-item">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="42" text-anchor="middle" font-family="serif" font-size="32" font-weight="700" fill="#cc0033" letter-spacing="3">NJIT</text>
+          <text x="100" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="500" fill="#666" letter-spacing="1">NEW JERSEY INSTITUTE OF TECHNOLOGY</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="projects" class="work-section">
+  <div class="container">
+    <h2 class="section-eyebrow">Tiny fraction of my work</h2>
+    <p class="section-desc">Self-starter projects across ML, NLP, and quantitative finance &mdash; built outside coursework to learn by shipping.</p>
+
+    <div class="projects-grid-new">
+
+      <div class="project-card-new">
+        <div class="project-illustration" style="background: linear-gradient(135deg, #ffe5e0 0%, #ffd6cf 100%);">
+          <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Credit card -->
+            <rect x="60" y="50" width="180" height="110" rx="12" fill="#1a1a1a"/>
+            <rect x="80" y="80" width="40" height="28" rx="4" fill="#ffd84d"/>
+            <rect x="80" y="125" width="120" height="6" rx="2" fill="#444"/>
+            <rect x="80" y="138" width="80" height="6" rx="2" fill="#444"/>
+            <!-- Alert badge -->
+            <circle cx="220" cy="50" r="22" fill="#e63946"/>
+            <text x="220" y="56" text-anchor="middle" fill="white" font-family="Inter" font-size="14" font-weight="700">!</text>
+            <!-- Detection waves -->
+            <circle cx="220" cy="50" r="32" fill="none" stroke="#e63946" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="220" cy="50" r="42" fill="none" stroke="#e63946" stroke-width="1.5" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tag">Machine Learning</div>
+          <h3>Credit Card Fraud Detector</h3>
+          <p>ML system that flags fraudulent transactions in real time. Handles severely imbalanced data (fraud cases under 1% of transactions) by applying oversampling techniques and benchmarking multiple classifiers for the best detection rate.</p>
+          <div class="project-card-tech">Python &middot; scikit-learn &middot; Pandas</div>
+        </div>
+      </div>
+
+      <div class="project-card-new">
+        <div class="project-illustration" style="background: linear-gradient(135deg, #e8e0f5 0%, #d8e3f0 100%);">
+          <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Newspaper stack -->
+            <rect x="50" y="40" width="140" height="110" rx="6" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="65" y="55" width="110" height="12" rx="2" fill="#1a1a1a"/>
+            <rect x="65" y="75" width="40" height="60" rx="2" fill="#d8e3f0"/>
+            <rect x="115" y="75" width="60" height="3" rx="1" fill="#888"/>
+            <rect x="115" y="83" width="55" height="3" rx="1" fill="#888"/>
+            <rect x="115" y="91" width="58" height="3" rx="1" fill="#888"/>
+            <rect x="115" y="99" width="50" height="3" rx="1" fill="#888"/>
+            <rect x="115" y="107" width="60" height="3" rx="1" fill="#888"/>
+            <rect x="115" y="115" width="45" height="3" rx="1" fill="#888"/>
+            <!-- True/Fake stamp -->
+            <g transform="translate(200,90) rotate(-15)">
+              <rect x="-5" y="-5" width="80" height="50" rx="4" fill="#e63946" opacity="0.95"/>
+              <text x="35" y="20" text-anchor="middle" fill="white" font-family="Inter" font-size="11" font-weight="700">FAKE</text>
+              <text x="35" y="34" text-anchor="middle" fill="white" font-family="Inter" font-size="8" font-weight="500">DETECTED</text>
+            </g>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tag">NLP</div>
+          <h3>Fake News Detector</h3>
+          <p>Text classification pipeline that identifies fake news articles using TF-IDF feature extraction and benchmarks multiple classifiers including logistic regression, random forest, and gradient boosting to find the best detection accuracy.</p>
+          <div class="project-card-tech">Python &middot; scikit-learn &middot; NLTK</div>
+        </div>
+      </div>
+
+      <div class="project-card-new">
+        <div class="project-illustration" style="background: linear-gradient(135deg, #d4f5dc 0%, #b8d8b8 100%);">
+          <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dashboard frame -->
+            <rect x="30" y="30" width="240" height="130" rx="8" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="30" y="30" width="240" height="20" rx="8 8 0 0" fill="#1a1a1a"/>
+            <circle cx="42" cy="40" r="3" fill="#ff5f57"/>
+            <circle cx="52" cy="40" r="3" fill="#ffbd2e"/>
+            <circle cx="62" cy="40" r="3" fill="#28c940"/>
+            <!-- Chart 1: candlestick -->
+            <g transform="translate(45,65)">
+              <line x1="10" y1="0" x2="10" y2="60" stroke="#888" stroke-width="0.5"/>
+              <line x1="0" y1="60" x2="80" y2="60" stroke="#888" stroke-width="0.5"/>
+              <rect x="15" y="30" width="6" height="20" fill="#28c940"/>
+              <line x1="18" y1="20" x2="18" y2="55" stroke="#28c940" stroke-width="1"/>
+              <rect x="25" y="20" width="6" height="25" fill="#28c940"/>
+              <line x1="28" y1="10" x2="28" y2="50" stroke="#28c940" stroke-width="1"/>
+              <rect x="35" y="25" width="6" height="20" fill="#e63946"/>
+              <line x1="38" y1="15" x2="38" y2="48" stroke="#e63946" stroke-width="1"/>
+              <rect x="45" y="15" width="6" height="30" fill="#28c940"/>
+              <line x1="48" y1="5" x2="48" y2="50" stroke="#28c940" stroke-width="1"/>
+              <rect x="55" y="20" width="6" height="25" fill="#28c940"/>
+              <line x1="58" y1="10" x2="58" y2="48" stroke="#28c940" stroke-width="1"/>
+              <rect x="65" y="10" width="6" height="35" fill="#28c940"/>
+              <line x1="68" y1="0" x2="68" y2="50" stroke="#28c940" stroke-width="1"/>
+            </g>
+            <!-- Chart 2: line graph -->
+            <g transform="translate(150,65)">
+              <line x1="10" y1="0" x2="10" y2="60" stroke="#888" stroke-width="0.5"/>
+              <line x1="0" y1="60" x2="100" y2="60" stroke="#888" stroke-width="0.5"/>
+              <polyline points="10,50 25,40 40,45 55,30 70,25 85,15 100,20" fill="none" stroke="#4a47e6" stroke-width="2"/>
+              <polyline points="10,55 25,48 40,50 55,40 70,38 85,30 100,32" fill="none" stroke="#e63946" stroke-width="2" stroke-dasharray="3,2"/>
+            </g>
+            <!-- Mini stats -->
+            <rect x="45" y="135" width="40" height="15" rx="3" fill="#f0f0f0"/>
+            <rect x="95" y="135" width="40" height="15" rx="3" fill="#f0f0f0"/>
+            <rect x="145" y="135" width="40" height="15" rx="3" fill="#f0f0f0"/>
+            <rect x="195" y="135" width="40" height="15" rx="3" fill="#f0f0f0"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tag">Data Engineering</div>
+          <h3>Live Stock Market Dashboard</h3>
+          <p>End-to-end data pipeline pulling real-time market data via the yfinance API, computing technical indicators including RSI and MACD across 24 visual panels, and rendering interactive plots for daily monitoring of equities and macro signals.</p>
+          <div class="project-card-tech">Python &middot; yfinance &middot; Pandas</div>
+        </div>
+      </div>
+
+      <div class="project-card-new">
+        <div class="project-illustration" style="background: linear-gradient(135deg, #fde8d6 0%, #ffd6a8 100%);">
+          <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Robot/bot body -->
+            <rect x="100" y="60" width="100" height="80" rx="12" fill="#1a1a1a"/>
+            <rect x="115" y="80" width="70" height="40" rx="6" fill="#28c940"/>
+            <!-- Bot eyes / chart on screen -->
+            <polyline points="120,110 130,100 140,105 150,90 160,95 170,85 180,90" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <!-- Antenna -->
+            <line x1="150" y1="60" x2="150" y2="40" stroke="#1a1a1a" stroke-width="2"/>
+            <circle cx="150" cy="38" r="4" fill="#e63946"/>
+            <!-- Trading arrows -->
+            <g transform="translate(50,80)">
+              <text x="0" y="0" font-family="Inter" font-size="22" font-weight="700" fill="#28c940">↑</text>
+              <text x="0" y="25" font-family="Inter" font-size="9" font-weight="600" fill="#1a1a1a">BUY</text>
+            </g>
+            <g transform="translate(225,80)">
+              <text x="0" y="0" font-family="Inter" font-size="22" font-weight="700" fill="#e63946">↓</text>
+              <text x="0" y="25" font-family="Inter" font-size="9" font-weight="600" fill="#1a1a1a">SELL</text>
+            </g>
+            <!-- Base -->
+            <rect x="120" y="140" width="60" height="6" rx="3" fill="#444"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tag">Quant Finance</div>
+          <h3>Algorithmic Trading Bots</h3>
+          <p>Multiple Python trading bots running MACD and SMA strategies through the Alpaca API with automated execution pipelines, modular strategy design, and real-time market data processing for backtesting and live trades.</p>
+          <div class="project-card-tech">Python &middot; Alpaca API</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="work-section" style="padding-top: 2rem;">
+  <div class="container">
+    <h2 class="section-eyebrow">Publications</h2>
+    <p class="section-desc">Peer-reviewed and preprint research output.</p>
+
+    <div class="publication-card">
+      <div class="pub-header">
+        <h3>Machine Learning Models Accurately Predict Stock Market Crashes Using Macroeconomic Indicators</h3>
+        <div class="pub-meta">Aarav Pulsani &middot; Research Archive of Rising Scholars</div>
+      </div>
+      <p class="pub-abstract">Research paper benchmarking five machine learning models on 73 years of U.S. macroeconomic data (1950&ndash;2023) to forecast stock market crashes six months in advance. The optimized random forest classifier achieved an AUC of 0.88 and correctly identified 81% of actual crash months, with the 10Y-2Y Treasury yield spread and CBOE VIX emerging as the most predictive features.</p>
+      <div class="pub-actions">
+        <a href="https://www.researchgate.net/publication/404701706_Machine_Learning_Models_Accurately_Predict_Stock_Market_Crashes_Using_Macroeconomic_Indicators" target="_blank" rel="noopener" class="case-btn">Read on ResearchGate</a>
+        <a href="https://github.com/s155003/stock-crash-ml" target="_blank" rel="noopener" class="case-btn case-btn-outline">View code</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="work-section">
+  <div class="container">
+    <h2 class="section-eyebrow">Blog</h2>
+    <p class="section-desc">Notes from the trenches &mdash; what I'm learning, building, and thinking about as I work through ML, finance, and research projects.</p>
+
+    <div class="blog-grid">
+
+      <article class="blog-card" onclick="openPost('post-1')">
+        <div class="blog-card-meta"><span class="blog-tag">Paper Notes</span><span class="blog-date">Mar 18, 2026</span></div>
+        <h3>The Two Cultures of Statistical Modeling</h3>
+        <p>Reading notes on Leo Breiman's 2001 essay on the gulf between data modeling and algorithmic modeling &mdash; and why the field has moved exactly where he predicted.</p>
+        <div class="blog-card-footer">Read article &rarr;</div>
+      </article>
+
+      <article class="blog-card" onclick="openPost('post-2')">
+        <div class="blog-card-meta"><span class="blog-tag">Paper Notes</span><span class="blog-date">Feb 22, 2026</span></div>
+        <h3>How Random Forests Actually Work</h3>
+        <p>Walking through Breiman's 2001 Random Forests paper from the ground up: strength, correlation, the role of bootstrap sampling, and why forests don't overfit.</p>
+        <div class="blog-card-footer">Read article &rarr;</div>
+      </article>
+
+      <article class="blog-card" onclick="openPost('post-3')">
+        <div class="blog-card-meta"><span class="blog-tag">Paper Notes</span><span class="blog-date">Jan 26, 2026</span></div>
+        <h3>What ML Practitioners Know That Textbooks Don't Cover</h3>
+        <p>A read-through of Pedro Domingos' "A Few Useful Things to Know About Machine Learning" &mdash; the dozen lessons that separate working practitioners from coursework graduates.</p>
+        <div class="blog-card-footer">Read article &rarr;</div>
+      </article>
+
+      <article class="blog-card" onclick="openPost('post-4')">
+        <div class="blog-card-meta"><span class="blog-tag">ML Theory</span><span class="blog-date">Dec 12, 2025</span></div>
+        <h3>The Curse of Dimensionality, Made Concrete</h3>
+        <p>Why intuitions from 2D and 3D break down in high dimensions, what it means for nearest-neighbor methods, and the partial counterweight Domingos calls the "blessing of nonuniformity."</p>
+        <div class="blog-card-footer">Read article &rarr;</div>
+      </article>
+
+      <article class="blog-card" onclick="openPost('post-5')">
+        <div class="blog-card-meta"><span class="blog-tag">Paper Notes</span><span class="blog-date">Oct 30, 2025</span></div>
+        <h3>Principal Component Analysis From the Ground Up</h3>
+        <p>Working through Shlens' PCA tutorial step by step &mdash; from a ball on a spring to eigenvectors of the covariance matrix, with the SVD connection made explicit.</p>
+        <div class="blog-card-footer">Read article &rarr;</div>
+      </article>
+
+      <article class="blog-card placeholder">
+        <div class="blog-card-meta"><span class="blog-tag">Research Notes</span><span class="blog-date">Coming soon</span></div>
+        <h3>Predicting Stock Crashes With ML: What 73 Years of Data Taught Me</h3>
+        <p>The methodology behind my first research paper &mdash; why random forests outperformed neural nets, and what the yield curve reveals about market psychology.</p>
+        <div class="blog-card-footer">Draft in progress</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- BLOG POST MODALS -->
+<div id="post-1" class="post-modal">
+  <div class="post-modal-content">
+    <button class="post-close" onclick="closePost('post-1')">&times;</button>
+    <div class="post-meta-line"><span class="blog-tag">Paper Notes</span> &middot; <span>Mar 18, 2026</span></div>
+    <h1>The Two Cultures of Statistical Modeling</h1>
+    <p>In 2001, Leo Breiman published a paper in <em>Statistical Science</em> titled "Statistical Modeling: The Two Cultures," and it reads less like a research article and more like a long-overdue argument. Breiman had spent years as a consultant before returning to academia, and when he came back and started reading statistical journals, he noticed something that bothered him: every paper started by assuming a model.</p>
+    <p>Breiman's central claim is that there are two fundamentally different approaches to learning from data, and that the statistical community had been almost exclusively committed to only one of them. The first approach, which he calls the data modeling culture, starts by assuming that the data was generated by a known stochastic process. You pick a model, usually something like linear regression or logistic regression, estimate its parameters from the data, and then draw conclusions from those parameters. Goodness-of-fit tests and residual analysis are used to check whether the model is acceptable. Breiman estimates that roughly 98 percent of statisticians worked this way at the time he was writing.</p>
+    <p>The second approach is what he calls algorithmic modeling. Here, the mechanism that generated the data is treated as unknown and complex. The goal is not to recover that mechanism but to find any function that predicts the output accurately. You evaluate the function by its predictive accuracy on held-out test data, not by whether it matches an assumed form. Decision trees, neural nets, and support vector machines all belong to this tradition. Breiman estimates that only about 2 percent of statisticians practiced this way, with the rest of the work being done by computer scientists and engineers in the emerging machine learning community.</p>
+    <p>The problem Breiman identifies with exclusive reliance on data models is straightforward but serious. When a model is fit to data, the conclusions drawn from it are conclusions about the model's mechanism, not about nature's mechanism. If the model is a poor approximation of how the data was actually generated, the conclusions may simply be wrong. Goodness-of-fit tests are supposed to catch this, but Breiman argues they are too weak to be reliable in practice. He cites work by Bickel, Ritov, and Stoker showing that omnibus goodness-of-fit tests have very little power unless the direction of the alternative is precisely specified. In higher dimensions, residual analysis breaks down similarly. William Cleveland, one of its originators, acknowledged in a seminar that residual analysis could not reliably uncover lack of fit in more than four or five dimensions.</p>
+    <p>Breiman illustrates the consequences with a study on gender discrimination in faculty salaries. A linear regression found the gender coefficient significant at the 5 percent level, and this was accepted as strong evidence of discrimination. But no one seriously checked whether the data could have been generated by a linear model. The conclusion came from the model, and nobody questioned the model. Breiman saw versions of this problem throughout applied statistics and in medical journals, where the Cox model and logistic regression had become de facto standards without serious scrutiny of whether they fit the data.</p>
+    <p>The paper also introduces three concepts Breiman considers central to understanding algorithmic modeling. The first is the <strong>Rashomon effect</strong>, named after Kurosawa's film in which the same events are described differently by different witnesses. In modeling, there are often many functions with nearly the same predictive accuracy but very different structures. In a 30-variable regression, for instance, there can be thousands of five-variable subsets with residual sums of squares within one percent of the minimum. Each one tells a different story about which variables matter. Picking one and treating its structure as truth ignores the instability underlying the selection.</p>
+    <p>The second concept is the <strong>Occam dilemma</strong>. Simple, interpretable models tend to be less accurate than complex ones. Breiman shows this concretely by comparing single decision trees to random forests across ten classification datasets. Forests are substantially more accurate in every case, sometimes by a factor of two or more, but their predictions emerge from hundreds of interacting trees and are essentially impossible to interpret directly. This creates a genuine tension between wanting to understand a model and wanting it to work.</p>
+    <p>The third concept concerns dimensionality. Conventional wisdom held that high-dimensional inputs were dangerous and that the number of features should be reduced aggressively. Breiman argues, and demonstrates with support vector machines and shape recognition forests, that increasing dimensionality can actually help when the right features are added, because a higher-dimensional feature space makes it easier to find separating hyperplanes.</p>
+    <p>Breiman is careful to say he is not arguing against data models entirely. His position is that the choice of modeling approach should be guided by the problem and the data, not by disciplinary convention. The paper ends with a call for statistics to broaden its toolkit, take predictive accuracy seriously as a criterion, and engage with the kinds of large and complex datasets that were becoming common in science and commerce. Given how machine learning has developed in the two decades since, it is fair to say the field moved in exactly the direction he was pointing.</p>
+  </div>
+</div>
+
+<div id="post-2" class="post-modal">
+  <div class="post-modal-content">
+    <button class="post-close" onclick="closePost('post-2')">&times;</button>
+    <div class="post-meta-line"><span class="blog-tag">Paper Notes</span> &middot; <span>Feb 22, 2026</span></div>
+    <h1>How Random Forests Actually Work</h1>
+    <p>Leo Breiman's 2001 paper "Random Forests" introduces and formalizes a class of ensemble classifiers that has since become one of the most widely used methods in machine learning. The core idea is simple: grow a large number of decision trees, each one built with some randomness injected into the process, and let them vote on predictions. The aggregate tends to be substantially more accurate than any individual tree.</p>
+    <p>The formal definition Breiman gives is precise. A random forest is a collection of tree classifiers where each tree depends on the values of a random vector that is sampled independently and with the same distribution for all trees. Each tree gets a vote for the most popular class at a given input, and the forest prediction is whichever class receives the most votes. The randomness can be introduced in different ways, and earlier work by researchers including Ho, Amit, and Geman had explored various approaches. Breiman's contribution is to unify these approaches theoretically and to introduce a specific implementation that performs particularly well in practice.</p>
+    <p>The theoretical foundation comes from two quantities Breiman calls <strong>strength</strong> and <strong>correlation</strong>. Strength measures how accurate individual trees are. Formally, it is the expected margin of the random forest classifier, where margin is defined as the amount by which the average vote for the correct class exceeds the average vote for the best competing class. Correlation measures the statistical dependence between the predictions of different trees in the forest. Breiman derives an upper bound on the generalization error that shows the error is bounded by a quantity that increases with correlation and decreases with the square of the strength. The goal of a well-designed random forest is to maximize strength and minimize correlation simultaneously, which is why the randomness in tree construction is not incidental but load-bearing.</p>
+    <p>The specific algorithm Breiman calls Forest-RI, for random input selection, achieves this by combining two sources of randomness. Each tree is trained on a bootstrap sample, a random draw with replacement from the original training data, so the trees see different versions of the dataset. At each node of each tree, instead of searching over all available features to find the best split, the algorithm selects a random subset of F features and searches only within that subset. The parameter F controls the tradeoff between strength and correlation: larger F allows the trees to find better splits and increases strength, but it also makes trees more similar to each other, increasing correlation. Breiman finds empirically that the results are not very sensitive to the exact value of F, and that selecting the integer part of log base 2 of M plus 1, where M is the total number of features, works well as a default.</p>
+    <p>One of the most important theoretical properties of random forests is that they do not overfit as more trees are added. Breiman proves this using the Strong Law of Large Numbers: as the number of trees grows, the aggregate vote converges almost surely to a fixed limit. This means that the generalization error converges to a stable value rather than continuing to decrease on training data while increasing on test data, which is the hallmark of overfitting. Adding trees can only help, never hurt.</p>
+    <p>The empirical results Breiman reports are strong. Across 19 datasets from the UCI repository plus several synthetic datasets, Forest-RI matches or outperforms Adaboost, which was at the time one of the most accurate classifiers available. On the zip-code handwriting recognition dataset, Forest-RI achieves 6.3 percent test error compared to Adaboost's 6.2 percent, while training substantially faster. On several smaller datasets the margins are larger. In regression, where the forest prediction is the average over individual tree predictions rather than a vote, forests outperform bagging in every dataset tested and outperform adaptive bagging in several.</p>
+    <p>Robustness to noise is another advantage. When 5 percent of training labels are randomly corrupted, Adaboost's error rate roughly triples on some datasets, because its reweighting mechanism concentrates weight on mislabeled examples that are persistently misclassified, distorting the learned model. Forest-RI shows almost no degradation under the same conditions, because it does not concentrate weight on any subset of examples.</p>
+    <p>The paper also introduces a method for measuring variable importance internally, without requiring a separate analysis. After each tree is trained, the values of each variable are randomly permuted in the out-of-bag examples, those training examples that were not included in the bootstrap sample for that tree, and those permuted examples are passed through the tree. The increase in misclassification rate due to permuting a variable measures how much that variable contributes to accuracy. Variables that matter produce large increases when permuted; irrelevant variables produce no increase. This importance measure is computed as part of a normal training run and requires no additional data.</p>
+    <p>The out-of-bag estimation scheme generalizes beyond variable importance. Because roughly one-third of the training data is left out of each individual tree, those left-out examples can be used to estimate generalization error, strength, correlation, and the c over s-squared ratio without setting aside a separate validation set. Breiman shows empirically that these out-of-bag estimates are approximately as accurate as estimates from a held-out test set of the same size, which makes random forests practical in settings where data is limited.</p>
+  </div>
+</div>
+
+<div id="post-3" class="post-modal">
+  <div class="post-modal-content">
+    <button class="post-close" onclick="closePost('post-3')">&times;</button>
+    <div class="post-meta-line"><span class="blog-tag">Paper Notes</span> &middot; <span>Jan 26, 2026</span></div>
+    <h1>What ML Practitioners Know That Textbooks Don't Cover</h1>
+    <p>Pedro Domingos' 2012 paper "A Few Useful Things to Know About Machine Learning," published in <em>Communications of the ACM</em>, is structured as a guide to the practical knowledge that experienced practitioners develop over time but that rarely appears in formal treatments of the subject. It covers twelve lessons, most of which correct misconceptions or add nuance to ideas that introductory courses present in simplified form.</p>
+    <p>The first and most fundamental lesson concerns what machine learning is actually optimizing for. Every learner consists of three components: a representation, which defines the space of possible models the learner can express; an evaluation function, which scores models against each other; and an optimization method, which searches for the highest-scoring model. Most textbooks are organized by representation, discussing decision trees, neural networks, support vector machines, and so on as separate topics. But the evaluation and optimization components are equally important and often the source of more practical difficulty.</p>
+    <p>The second lesson is about generalization. The goal of machine learning is not to perform well on training data but to perform well on new data. This distinction sounds obvious but has significant practical implications. Contamination of test data is common and can be subtle: if parameters are tuned using test data, or if preprocessing decisions are made by examining test data, the reported performance will be optimistic. Domingos also notes that in some settings, a locally optimal solution found by greedy search generalizes better than the global optimum, because the global optimum may be overfit to the training data.</p>
+    <p>The third lesson is one of the more philosophically significant: <strong>data alone is not enough</strong>. No learner can generalize from training examples to new examples without making some assumptions about the structure of the problem. Wolpert's no free lunch theorems formalize this by showing that no learning algorithm outperforms random guessing when performance is averaged over all possible functions. The algorithms that work in practice do so because their built-in assumptions match the structure of the real-world problems they are applied to, not because they are assumption-free.</p>
+    <p>On overfitting, Domingos goes beyond the standard description to decompose generalization error into bias and variance. Bias is the tendency to consistently learn the same wrong thing, a property of models whose hypothesis space cannot represent the true function. Variance is the tendency to learn different things on different training sets, a property of flexible models that are sensitive to the specific data they see. The two are in tension: reducing bias typically requires more complex models with higher variance, and vice versa. Domingos also highlights the problem of multiple testing, where running enough experiments makes spurious results look significant by chance, and notes that cross-validation itself can overfit if used to make too many parameter choices.</p>
+    <p>The curse of dimensionality receives extended treatment. In high dimensions, geometric intuitions from two or three dimensions break down systematically. A nearest-neighbor classifier that works well in low dimensions fails in high dimensions because all points become approximately equidistant. Even with a trillion training examples and 100 features, the data covers only an astronomically small fraction of the input space. This is not merely a theoretical concern: it directly affects the reliability of similarity-based reasoning that underlies most learning algorithms.</p>
+    <p>Feature engineering, Domingos argues, is more important than algorithm choice. The single biggest determinant of whether a machine learning project succeeds is the quality and relevance of the features used. Raw data often needs to be transformed, combined, or reframed before a learning algorithm can extract useful structure from it. This work is domain-specific and not automatable in general, which is why most of the time in a machine learning project goes into data preparation and feature construction rather than into running the algorithm.</p>
+    <p>The point about more data beating cleverer algorithms is empirically well-supported. Different learning algorithms tend to converge to similar performance as the amount of training data increases, because they are all ultimately grouping nearby examples into the same class and the main differences are in how they define proximity. A simpler algorithm with more data frequently outperforms a sophisticated algorithm with less data. This has practical implications for how to allocate effort between improving models and collecting more training examples.</p>
+    <p>On ensembles, Domingos notes that combining multiple models almost always improves on the best individual model, and the margin can be large. The Netflix Prize competition, in which teams competed to improve a movie recommendation system, was ultimately won by a stacked ensemble of over 100 learners, and combining the two finalist ensembles improved performance further still. Model ensembles are distinct from Bayesian model averaging, which weights hypotheses by posterior probability and tends in practice to be dominated by a single high-probability hypothesis, making it equivalent to just selecting that hypothesis.</p>
+    <p>The final lesson concerns causation. Machine learning algorithms learn statistical associations, not causal relationships. A model that accurately predicts which patients will be readmitted to a hospital does not tell you that intervening on any particular feature will change that outcome. Using predictive models to guide interventions requires additional reasoning, typically involving experimental data or domain knowledge, that the model itself cannot provide.</p>
+  </div>
+</div>
+
+<div id="post-4" class="post-modal">
+  <div class="post-modal-content">
+    <button class="post-close" onclick="closePost('post-4')">&times;</button>
+    <div class="post-meta-line"><span class="blog-tag">ML Theory</span> &middot; <span>Dec 12, 2025</span></div>
+    <h1>The Curse of Dimensionality, Made Concrete</h1>
+    <p>One of the recurring themes in Pedro Domingos' "A Few Useful Things to Know About Machine Learning" is that problems that are tractable in low dimensions can become fundamentally different in high dimensions, and that the intuitions developed from low-dimensional experience are often wrong when applied to data with many features. This isn't a minor technical caveat but a core property of high-dimensional geometry with direct consequences for how machine learning algorithms behave.</p>
+    <p>The basic problem is that volume grows exponentially with dimension. In one dimension, covering 10 percent of the range of a unit interval requires an interval of length 0.1. In two dimensions, covering 10 percent of the area of a unit square requires a square with side length 0.1 raised to the power of 0.5, which is about 0.32. In ten dimensions, covering 10 percent of the volume of a unit hypercube requires a hypercube with side length 0.1 raised to the power of 0.1, which is about 0.8. By ten dimensions, what looks like a local neighborhood in terms of the fraction of data it contains actually spans 80 percent of the range in every dimension. The concept of locality, which most learning algorithms depend on implicitly or explicitly, ceases to be meaningful.</p>
+    <p>This has immediate consequences for nearest-neighbor methods. The k-nearest neighbor classifier works by finding the k training examples closest to a new test point and predicting the majority class among them. In low dimensions with dense training data, the nearest neighbors are genuinely nearby and represent similar inputs. In high dimensions, the nearest neighbors of any point tend to be nearly as far away as any other point in the dataset. Domingos gives a specific example: if the class depends only on two features but there are 98 irrelevant additional features, the noise from those irrelevant features completely overwhelms the signal in the two relevant ones, and the nearest-neighbor classifier makes essentially random predictions.</p>
+    <p>The geometry worsens further. In high dimensions, most of the volume of a hypersphere is concentrated near its surface rather than its interior. If you sample points uniformly from a high-dimensional ball, almost all of them will be found in a thin shell near the boundary. If you inscribe a hypersphere inside a hypercube, the fraction of the hypercube's volume that lies inside the hypersphere approaches zero as the number of dimensions increases. These are precise geometric facts with no approximation. They mean that algorithms relying on volumetric arguments, density estimates, or geometric intuitions built in low dimensions cannot be trusted to behave similarly in high-dimensional settings.</p>
+    <p>The theoretical guarantees that machine learning relies on are also affected. PAC learning bounds, which specify how many training examples are needed to ensure good generalization with high probability, grow with the size of the hypothesis space. For many natural function classes, the hypothesis space is exponential in the number of features. The bounds then imply an exponential sample size requirement, which cannot be satisfied by any realistic dataset. Domingos notes that these bounds are typically very loose in practice and that real algorithms generalize with far less data than the bounds require. But the looseness is itself somewhat uncomfortable: if the theory says you need millions of examples and you're working with thousands, you don't have a proof that your model will generalize, you just have empirical hope that it does.</p>
+    <p>There is a partial counterweight to the curse of dimensionality that Domingos calls the <strong>blessing of nonuniformity</strong>. Real-world data is almost never distributed uniformly across the input space. Images of handwritten digits form a low-dimensional manifold within the space of all possible pixel arrays: not all combinations of pixel values correspond to plausible digit images. Speech signals occupy a small subspace of all possible audio waveforms. Natural language follows syntactic and semantic constraints that rule out most possible sequences of words. Learning algorithms can exploit this lower effective dimensionality without explicitly modeling the manifold structure, which is part of why methods like nearest neighbors work better on real data than the curse-of-dimensionality argument would predict.</p>
+    <p>Dimensionality reduction methods make this structure explicit. Principal component analysis projects the data onto the directions of maximum variance, reducing the number of dimensions while retaining most of the variation in the data. Nonlinear methods like Isomap attempt to find low-dimensional representations that preserve the intrinsic geometry of the data even when the manifold is curved. These methods can substantially improve the performance of downstream algorithms by removing irrelevant dimensions and reducing the sparsity problem.</p>
+    <p>The practical implication for anyone working with high-dimensional data is to approach it with more skepticism about apparent patterns. In high dimensions, spurious correlations are common because there are many possible pairs of variables and some will appear related by chance. Models can appear to fit training data well while generalizing poorly, not because of a subtle algorithmic failure but because the high-dimensional space is inherently sparse and the training data covers too little of it to make confident inferences.</p>
+  </div>
+</div>
+
+<div id="post-5" class="post-modal">
+  <div class="post-modal-content">
+    <button class="post-close" onclick="closePost('post-5')">&times;</button>
+    <div class="post-meta-line"><span class="blog-tag">Paper Notes</span> &middot; <span>Oct 30, 2025</span></div>
+    <h1>Principal Component Analysis From the Ground Up</h1>
+    <p>Jonathon Shlens' "A Tutorial on Principal Component Analysis" takes a technique that is often presented as a computational black box and builds it up carefully from geometric intuition through linear algebra to a working implementation. The paper is worth reading carefully because PCA is one of those methods that gets applied widely but is genuinely understood by fewer people than use it.</p>
+    <p>The motivating problem Shlens introduces is a physics experiment. A ball on a spring oscillates back and forth along a single axis. Three cameras observe the ball from different angles, none of which aligns with the direction of motion. Each camera records a two-dimensional projection of the ball's position, giving six total measurements for every moment in time. The underlying system has one degree of freedom, but the experimenter sees six correlated, noisy measurements and has no way of knowing in advance that this is the case. The goal of PCA is to identify, from the data alone, that most of the variation can be explained by a single direction, and to find what that direction is.</p>
+    <p>The formal setup treats the dataset as an m by n matrix X, where m is the number of measurement types and n is the number of observations. Each column of X is a single snapshot of the system. The covariance matrix of the data is defined as the m by m matrix CX, equal to one over n times X multiplied by its transpose. The diagonal entries of CX are the variances of the individual measurements. The off-diagonal entries are the covariances between pairs of measurements, capturing the redundancy in the data. Large off-diagonal values indicate that two measurements are highly correlated and therefore partially redundant.</p>
+    <p>PCA seeks a linear transformation Y equals PX such that the covariance matrix of Y is diagonal. A diagonal covariance matrix means the transformed variables are uncorrelated, which is the formal statement of removing redundancy. The rows of P define a new set of basis vectors for the data, and the transformed data Y expresses each observation in terms of those new basis vectors. The principal components are the rows of the optimal P.</p>
+    <p>The mathematical result is that the optimal P is the matrix whose rows are the eigenvectors of CX. This follows from a property of symmetric matrices: any symmetric matrix can be diagonalized by an orthogonal matrix of its eigenvectors. Since CX is symmetric by construction, its eigenvectors form such a matrix. When P is set to the transpose of this eigenvector matrix, the expression for the covariance of Y simplifies to the diagonal matrix of eigenvalues. The eigenvalues give the variance of the data along each principal component, which provides a natural way to rank the components by importance.</p>
+    <p>Shlens also derives the connection between PCA and singular value decomposition. Define a new matrix Y as one over the square root of n times the transpose of X. Then the matrix Y transpose times Y equals the covariance matrix CX. Computing the SVD of Y gives a factorization U times sigma times V transpose. The columns of V are the eigenvectors of Y transpose Y, which are exactly the eigenvectors of CX, which are the principal components. The singular values on the diagonal of sigma are the square roots of the eigenvalues of CX and are proportional to the standard deviations of the data along each principal component. Most numerical implementations of PCA use SVD rather than direct eigendecomposition because SVD is more numerically stable when the covariance matrix is ill-conditioned.</p>
+    <p>The practical procedure is straightforward. Organize the data as an m by n matrix with measurements as rows. Subtract the mean of each row so that each measurement type has zero mean. Compute either the eigenvectors of the covariance matrix or the SVD of the mean-subtracted data matrix. The resulting eigenvectors, ordered by their eigenvalues from largest to smallest, are the principal components. Project the original data onto the top k principal components to get a reduced representation that captures the k most important directions of variation.</p>
+    <p>The assumptions embedded in this procedure are worth stating explicitly. PCA assumes that the important structure in the data lies along directions of large variance, which requires that the signal-to-noise ratio is reasonably high. It assumes that the relevant relationships are linear, meaning the important directions are linear combinations of the original variables. It assumes that the principal components should be orthogonal to each other, which simplifies the algebra and makes the solution unique but imposes a geometric constraint on the answer.</p>
+    <p>Shlens discusses two categories of failure. The first involves nonlinear structure. If a person is moving in a circle, the trajectory can be described by a single variable, the angle, but that angle is a nonlinear function of the Cartesian coordinates. PCA will find two principal components corresponding to the x and y directions rather than recovering the angle, because it can only represent linear combinations. Kernel PCA addresses this by applying a nonlinear transformation to the data before computing principal components. The second category involves non-Gaussian data. PCA minimizes second-order dependencies, meaning correlations, but does not remove higher-order dependencies. Independent component analysis, which maximizes statistical independence rather than decorrelation, handles cases where the important structure is captured by higher-order statistics. Shlens notes that when a data set is Gaussian distributed, removing second-order dependencies is sufficient, because Gaussian distributions are fully characterized by their first two moments.</p>
+  </div>
+</div>
+
+<section class="skills-section">
+  <div class="container">
+    <div class="skills-grid">
+      <div class="skill-block">
+        <div class="skill-arch lines"></div>
+        <h3>Languages &amp; Frameworks</h3>
+        <ul>
+          <li>Python (NumPy, Pandas, scikit-learn, PyTorch)</li>
+          <li>C++</li>
+          <li>MATLAB</li>
+          <li>TypeScript &middot; JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <div class="skill-arch bricks"></div>
+        <h3>What I'm good at</h3>
+        <ul>
+          <li>Sensor pipelines &amp; signal processing</li>
+          <li>ML modeling on time-series data</li>
+          <li>Production backends &amp; API design</li>
+          <li>Multi-disciplinary research collaboration</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <div class="skill-arch dots"></div>
+        <h3>Communities</h3>
+        <ul>
+          <li>Aggie Coding Club</li>
+          <li>TAMU Datathon</li>
+          <li>Aggie Data Science Club</li>
+          <li>TAMU ThinkTank</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="journey-section">
+  <div class="container">
+    <div class="journey-header">
+      <h2>My Professional Journey</h2>
+      <p>A timeline of my academic and professional experiences, showcasing my growth and contributions in various roles.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-row right">
+        <div class="tl-marker"><span class="tl-year">2026</span><span class="tl-dot"></span></div>
+        <div class="tl-content">
+          <h3>Undergraduate Researcher</h3>
+          <div class="org">University of Alabama &middot; NSF REU</div>
+          <ul>
+            <li>Trustworthy AI &amp; adversarial robustness in safety-critical ML</li>
+            <li>PyTorch classifiers on multi-modal sensor data (LiDAR, GPS, CAN bus, V2X)</li>
+            <li>Detecting adversarial attacks in real time</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row left">
+        <div class="tl-content">
+          <h3>Undergraduate Researcher</h3>
+          <div class="org">Aggie Collaborate &middot; Animal Sciences (Kleberg), Texas A&amp;M</div>
+          <ul>
+            <li>Built ML models and Vensim system dynamics simulations for the U.S. dairy production value chain</li>
+            <li>Working with vets, animal scientists, economists</li>
+            <li>Heart of Texas Conference + TAMU SRW (Fall)</li>
+          </ul>
+        </div>
+        <div class="tl-marker"><span class="tl-dot"></span><span class="tl-year">2026</span></div>
+      </div>
+
+      <div class="tl-row right">
+        <div class="tl-marker"><span class="tl-year">2025</span><span class="tl-dot"></span></div>
+        <div class="tl-content">
+          <h3>Undergraduate Research Assistant</h3>
+          <div class="org">Texas A&amp;M LIVE Lab</div>
+          <ul>
+            <li>Real-time C++ pipeline for Oculus VR motion data</li>
+            <li>Python-generated reports for clinicians</li>
+            <li>Sensor synchronization &amp; calibration routines</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row left">
+        <div class="tl-content">
+          <h3>ML/SWE Intern</h3>
+          <div class="org">Profluento</div>
+          <ul>
+            <li>Production speech-to-text in Python (FastAPI)</li>
+            <li>OpenAI Whisper, 100+ active users</li>
+            <li>In-memory caching for high-traffic load</li>
+          </ul>
+        </div>
+        <div class="tl-marker"><span class="tl-dot"></span><span class="tl-year">2025</span></div>
+      </div>
+
+      <div class="tl-row right">
+        <div class="tl-marker"><span class="tl-year">2025</span><span class="tl-dot"></span></div>
+        <div class="tl-content">
+          <h3>Independent Researcher</h3>
+          <div class="org">NJIT Collaboration</div>
+          <ul>
+            <li>Co-authored ML paper on stock crash prediction</li>
+            <li>Random forest hit 0.88 AUC on 73 years of data</li>
+            <li>Yield curve and VIX as top features</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-row left">
+        <div class="tl-content">
+          <h3>Financial Infrastructure Engineering Intern</h3>
+          <div class="org">KAPY Investments</div>
+          <ul>
+            <li>AI pipeline processing 500+ investment memos</li>
+            <li>Cut reporting time by ~60%</li>
+            <li>Secure data flows for blockchain-adjacent fintech</li>
+          </ul>
+        </div>
+        <div class="tl-marker"><span class="tl-dot"></span><span class="tl-year">2024</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="education-section">
+  <div class="container">
+    <h2>Education</h2>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="edu-icon uni">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10 L12 5 L2 10 L12 15 L22 10 Z"/>
+            <path d="M6 12 V17 C6 17 8 19 12 19 C16 19 18 17 18 17 V12"/>
+          </svg>
+        </div>
+        <div class="edu-info">
+          <h3>Texas A&amp;M University</h3>
+          <div class="level">Higher Education</div>
+          <div class="degree">B.S. Computer Engineering, Mathematics Minor</div>
+          <div class="focus">Focus on AI, ML, and embedded systems &middot; 4.0 GPA &middot; Class of 2028</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-icon hs">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4 H10 A2 2 0 0 1 12 6 V20 A2 2 0 0 0 10 18 H4 Z"/>
+            <path d="M20 4 H14 A2 2 0 0 0 12 6 V20 A2 2 0 0 1 14 18 H20 Z"/>
+          </svg>
+        </div>
+        <div class="edu-info">
+          <h3>College of Engineering</h3>
+          <div class="level">Coursework Highlights</div>
+          <div class="degree">Foundations</div>
+          <div class="focus">Discrete Structures, Program Design and Concepts, Introduction to Computing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section">
+  <div class="container">
+    <h2>Recognition</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <blockquote>"Selected as an NSF REU Fellow studying trustworthy AI and adversarial robustness in safety-critical ML systems."</blockquote>
+        <div class="stars">★★★★★</div>
+        <div class="name">University of Alabama</div>
+        <div class="org">NSF Research Experience for Undergraduates</div>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Co-authored a research paper on machine learning predictions of stock market crashes, pending publication."</blockquote>
+        <div class="stars">★★★★★</div>
+        <div class="name">Independent Research</div>
+        <div class="org">NJIT Collaboration</div>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Presented original research at TAMU Student Research Week and the Heart of Texas Research Conference."</blockquote>
+        <div class="stars">★★★★★</div>
+        <div class="name">Conference Presenter</div>
+        <div class="org">Aggie Collaborate, Spring 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-left">
+      <h2>Let's work together</h2>
+      <p>Open to research collaborations, internships, and interesting problems &mdash; especially at the intersection of ML and the physical world.</p>
+      <div class="socials">
+        <a href="https://linkedin.com/in/aarav-pulsani-7874b3271" class="social-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="https://github.com/s155003" class="social-link" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="mailto:aaravpulsani@gmail.com" class="social-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,7 12,13 22,7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <form onsubmit="event.preventDefault(); window.location.href='mailto:aaravpulsani@gmail.com?subject=Hello&body='+encodeURIComponent(document.getElementById('msg').value);">
+        <div class="form-field"><input type="text" id="name" placeholder="Name" required></div>
+        <div class="form-field"><input type="email" id="email" placeholder="Email" required></div>
+        <div class="form-field"><textarea id="msg" placeholder="Message" required></textarea></div>
+        <button type="submit" class="send-btn">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  function setIcon() {
+    const cur = document.documentElement.getAttribute('data-theme');
+    btn.textContent = cur === 'dark' ? '☾' : '☀';
+  }
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+  setIcon();
+  function toggleTheme() {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setIcon();
+  }
+  function openPost(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePost(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.post-modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) closePost(m.id); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.post-modal.open').forEach(m => closePost(m.id));
+    }
+  });
+</script>
+
+</body>
+</html>
